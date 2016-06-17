@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Libsite2/.idea/Libsite2.iml" filepath="$PROJECT_DIR$/../Libsite2/.idea/Libsite2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/libsite.iml" filepath="$PROJECT_DIR$/.idea/libsite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../libsite2/.idea/libsite2.iml" filepath="$PROJECT_DIR$/../libsite2/.idea/libsite2.iml" />
+    </modules>
+  </component>
+</project>

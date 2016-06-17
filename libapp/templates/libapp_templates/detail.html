@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>My Library APP</title>
+</head>
+
+<body>
+    <p><a href="{%url 'index'%}">Index page (URL Namespacing)</a></p>
+
+     <p>Item Type: {{ item_type }}</p>
+     <p>Item Name: {{ item_title }}</p>
+
+     {% if item_type == 'Book'%}
+      <p>    Item Author: {{ item_author }} </p>
+      <p>    Item Category: {{ item_category }} </p>
+     {% else%}
+      <p>  Item Maker: {{ item_maker }} </p>
+      <p>   Item Rating: {{ item_rating }} </p>
+     {% endif%}
+
+     <p>Item Duedate: {{ item_duedate }}</p>
+
+</body>
+</html>

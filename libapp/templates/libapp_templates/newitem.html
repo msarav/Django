@@ -1,0 +1,15 @@
+{% extends 'libapp_templates/base.html' %}
+
+{% block body_block %}
+
+    <p>You can suggest a new item here</p>
+
+    <form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+    </form>
+
+{#    <p><a href="{%url 'libapp:about'%}">About page</a></p>#}
+
+{% endblock %}

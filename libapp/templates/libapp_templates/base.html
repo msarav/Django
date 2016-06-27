@@ -8,16 +8,32 @@
     </head>
 
     <body>
-        <div>
-            <h1>{% block myhdg %}Hello Satish {% endblock %}</h1>
-            {% block body_block %}*** {% endblock %}
-        </div>
-        <hr />
-        <div>
-            <ul>
-                <li class="hbar1"><a href="/libapp/about/">Find out about this site</a></li>
-                <li class="hbar1"><a href = "{% url 'libapp:index' %}">Click here to return to main page</a><br/></li>
-            </ul>
-        </div>
+
+        {% if user.is_authenticated %}
+            <div>
+                <h1>{% block myhdg %}Hello {{ user }} {% endblock %}</h1>
+                {% block body_block %}*** {% endblock %}
+            </div>
+            <hr />
+            <div>
+                <ul>
+                    <li class="hbar1"><a href = "{% url 'libapp:index' %}">Main</a></li>
+                    <li class="hbar1"><a href="{% url 'libapp:suggestion' %}">Suggestions</a></li>
+                    <li class="hbar1"><a href="{% url 'libapp:newitem' %}">Add Suggestion</a></li>
+                    <li class="hbar1"><a href="{% url 'libapp:searchlib' %}">Search</a></li>
+                    <li class="hbar1"><a href="{% url 'libapp:myitems' %}">My Items</a></li>
+                    <li class="hbar1"><a href="/libapp/about/">About</a></li>
+                    <li class="hbar1"><a href="{% url 'libapp:logout' %}">Logout</a></li>
+
+                </ul>
+            </div>
+
+        {% else %}
+
+            <p> You are not logged in... Kindly Login/Register.... </p> <br/>
+            <a href="{% url 'libapp:login' %}"> Login </a>  &nbsp;
+            <a href="{% url 'libapp:searchlib' %}"> Register here </a>
+
+        {% endif %}
     </body>
 </html>

@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 import datetime
 from django.contrib import admin
-from libapp.models import Book, Dvd, Libuser, Libitem
+from libapp.models import Book, Dvd, Libuser, Libitem, Suggestion
 
 
 def make_published(modeladmin, request, queryset):
@@ -31,7 +31,7 @@ class DvdInline(admin.TabularInline):
 
 
 class LibuserAdmin(admin.ModelAdmin):
-    fields = [('username'), ('first_name', 'last_name')]
+    # fields = [('username'), ('first_name', 'last_name')]
     inlines = [BookInline, DvdInline]
 
 
@@ -66,3 +66,4 @@ class DvdAdmin(admin.ModelAdmin):
 admin.site.register(Book, BookAdmin)
 admin.site.register(Dvd, DvdAdmin)
 admin.site.register(Libuser, LibuserAdmin)
+admin.site.register(Suggestion)

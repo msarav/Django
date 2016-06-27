@@ -1,0 +1,29 @@
+{% extends 'libapp_templates/base.html' %}
+
+{% block body_block %}
+
+    <table>
+    <tr>
+        <th>Title</th>
+        <th>Publish Year</th>
+        <th>Type</th>
+        <th>Cost</th>
+        <th>Interested</th>
+        <th>Comments</th>
+    </tr>
+    {% for item in itemlist %}
+    <tr>
+        <td>{{ item.title }}</td>
+        <td>{{ item.pubyr }}</td>
+        <td>{{ item.type }}</td>
+        <td>{{ item.cost }}</td>
+        <td>{{ item.num_interested }}</td>
+        <td>{{ item.comments }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+
+
+{#    <p><a href="{%url 'libapp:about'%}">About page</a></p>#}
+
+{% endblock %}

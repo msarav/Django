@@ -1,9 +1,10 @@
 {% extends 'libapp_templates/base.html' %}
 
 {% block body_block %}
+     <p> {{ message }}</p>
     {% if itemlist.count > 0 %}
-        <p> You've checked out the below items...</p>
-        <table>
+
+        <table class="table table-bordered table-hover table-responsive">
         <tr>
             <th>Title</th>
             <th>Published Year</th>

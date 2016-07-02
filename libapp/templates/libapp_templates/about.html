@@ -2,10 +2,11 @@
 
 {% block body_block %}
 
-    <p><a href="{%url 'index'%}">Index page (URL Namespacing)</a></p>
-    <p><a href="../../index">Index page (Hardcoded)</a></p>
+{#    <p><a href="{%url 'index'%}">Index page (URL Namespacing)</a>#}
+{#    &nbsp;<a href="../../index">Index page (Hardcoded)</a></p>#}
 
-    <p>This is the about page of the application</p>
+    <p>This page has a visit counter..</p>
 
+    <p>No.of.Visits - <span class="badge">{{ visits }} </span> </p>
 {% endblock %}
 

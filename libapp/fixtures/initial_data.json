@@ -1,0 +1,46 @@
+[
+
+  {"model": "libapp.libitem", "pk": 1,
+    "fields": {"title": "Advanced Optical Networks", "itemtype": "Book", "checked_out": false, "user": null,
+      "duedate": null, "last_chkout": null, "date_acquired": "2016-06-29", "pubyr": 2013, "num_chkout": 0}},
+  {"model": "libapp.book", "pk": 1, "fields": {"author": "John Smith", "category": 4}},
+
+  {"model": "libapp.libitem", "pk": 5,
+    "fields": {"title": "Wireless Networks", "itemtype": "Book", "checked_out": false, "user": null,
+      "duedate": null, "last_chkout": null, "date_acquired": "2016-06-29", "pubyr": 2012, "num_chkout": 0}},
+  {"model": "libapp.book", "pk": 5, "fields": {"author": "Mary Hall", "category": 4}},
+
+  {"model": "libapp.libitem", "pk": 3,
+    "fields": {"title": "The New World", "itemtype": "Book", "checked_out": false, "user": null,
+      "duedate": null, "last_chkout": null, "date_acquired": "2016-06-29", "pubyr": 2011, "num_chkout": 0}},
+  {"model": "libapp.book", "pk": 3, "fields": {"author": "John King", "category": 3}},
+
+  {"model": "libapp.libitem", "pk": 4,
+    "fields": {"title": "Python Programming", "itemtype": "Book", "checked_out": false, "user": null,
+      "duedate": null, "last_chkout": null, "date_acquired": "2016-06-29", "pubyr": 2013, "num_chkout": 0}},
+  {"model": "libapp.book", "pk": 4, "fields": {"author": "Alan Jones", "category": 4}},
+
+   {"model": "libapp.libitem", "pk": 6,
+    "fields": {"title": "A Good Story", "itemtype": "Book", "checked_out": false, "user": null,
+      "duedate": null, "last_chkout": null, "date_acquired": "2016-06-29", "pubyr": 2011, "num_chkout": 0}},
+  {"model": "libapp.book", "pk": 6, "fields": {"author": "Mary Hall", "category": 3}},
+
+
+  {"model": "libapp.libitem", "pk": 7,
+    "fields": {"title": "A New Adventure", "itemtype": "DVD", "checked_out": false, "user": null, "duedate": null,
+      "last_chkout": null, "date_acquired": "2016-06-29", "pubyr": 2014, "num_chkout": 0}},
+  {"model": "libapp.dvd", "pk": 7, "fields": {"maker": "Sony", "duration": 1, "rating": 1}},
+
+    {"model": "libapp.libitem", "pk": 8,
+    "fields": {"title": "Funny Movie", "itemtype": "DVD", "checked_out": false, "user": null, "duedate": null,
+      "last_chkout": null, "date_acquired": "2016-06-29", "pubyr": 2013, "num_chkout": 0}},
+  {"model": "libapp.dvd", "pk": 8, "fields": {"maker": "Pixar", "duration": 1, "rating": 1}},
+
+    {"model": "libapp.libitem", "pk": 9,
+    "fields": {"title": "The Big Mystery", "itemtype": "DVD", "checked_out": false, "user": null, "duedate": null,
+      "last_chkout": null, "date_acquired": "2016-06-29", "pubyr": 2014, "num_chkout": 0}},
+  {"model": "libapp.dvd", "pk": 9, "fields": {"maker": "Sony", "duration": 1, "rating": 1}},
+
+  {"model": "libapp.suggestion", "pk": 1, "fields": {"title": "DBMS", "pubyr": 2012, "type": 1, "cost": 120, "num_interested": 1,
+    "comments": "Need DBMS for course"}}
+]

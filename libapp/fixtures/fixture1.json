@@ -1,0 +1,9 @@
+[
+
+  {"model": "auth.user", "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$24000$89m1jfWCYRtn$s+tXt3zZCIBBB3IjXSxmTjG1yDjNXH0/i2GMAiJiNv8=",
+      "last_login": "2016-06-29T20:22:16.265Z", "is_superuser": true, "username": "manis", "first_name": "Saravanan", "last_name": "Mani",
+      "email": "manis@uwindsor.ca", "is_staff": true, "is_active": true, "date_joined": "2016-06-29T20:21:57.976Z", "groups": [],
+      "user_permissions": []}}
+]

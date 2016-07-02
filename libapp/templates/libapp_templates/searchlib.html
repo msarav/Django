@@ -8,35 +8,40 @@
         <p>{{ message }}</p>
     {% endif %}
 
-    <form action="" method="post">
+    <form class="form-horizontal" role="form" action="" method="post">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" />
+    {{ form.as_p }}
+    <input class="btn btn-default" type="submit" value="Submit" />
+     &nbsp;&nbsp;
+    <input class="btn btn-default" type="reset" value="Reset" />
     </form>
+    <p> <br/>
+        {% if itemlist.count > 0 %}
+        <p> Displaying results.. </p>
+        <table class="table table-bordered table-hover table-responsive">
+            <thead>
+                <tr>
+                     <th>Title</th>
+                     <th>Pubyr</th>
+                     <th>Type</th>
+                </tr>
+            </thead>
 
-    {% if itemlist.count > 0 %}
-    <table>
-        <thead>
-            <tr>
-                 <th>Title</th>
-                 <th>Pubyr</th>
-                 <th>Type</th>
-            </tr>
-        </thead>
-
-         <tbody>
-            {% for item in itemlist %}
-            <tr>
-                 <td>{{ item.title }}</td>
-                 <td>{{ item.pubyr }}</td>
-                 <td>{{ item.itemtype }}</td>
-            </tr>
-           {% endfor %}
-         </tbody>
-    </table>
-    {% else %}
-        <p>No Items returned...</p>
-    {% endif %}
+             <tbody>
+                {% for item in itemlist %}
+                <tr>
+                     <td>{{ item.title }}</td>
+                     <td>{{ item.pubyr }}</td>
+                     <td>{{ item.itemtype }}</td>
+                </tr>
+               {% endfor %}
+             </tbody>
+        </table>
+        {% else %}
+             <p>&nbsp;</p>
+            <p>No Items returned...</p>
+        {% endif %}
+    </p>
 
 
 

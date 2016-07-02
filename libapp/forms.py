@@ -10,7 +10,21 @@ class LoginForm(forms.ModelForm):
 class SuggestionForm(forms.ModelForm):
     class Meta:
         model = Suggestion
-        fields = ['title', 'pubyr', 'type', 'cost','comments']
+        fields = ['title','author','edition','publication','pubyr', 'type', 'cost','comments']
+
+        widgets= { 'type':forms.RadioSelect,'pubyr':forms.TextInput,'cost':forms.TextInput, }
+
+class RegisterForm(forms.ModelForm):
+    class Meta:
+        # password = forms.CharField(widget=forms.PasswordInput())
+        model = Libuser
+        fields = ['username', 'first_name', 'last_name', 'password','user_image']
+
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
+
+
 
 
 class SearchlibForm(forms.Form):

@@ -2,20 +2,23 @@
 
 # Create your views here.
 # Import necessary classes
-
-from django.http import HttpResponseRedirect
+import random
+from django.http import HttpResponseRedirect,HttpResponse
 from django.core.urlresolvers import reverse
 
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render,render_to_response
 from libapp.models import Book, Dvd, Libuser, Libitem, Suggestion
-from libapp.forms import SuggestionForm,SearchlibForm, LoginForm
+from libapp.forms import SuggestionForm,SearchlibForm, LoginForm, RegisterForm
 from django.shortcuts import get_object_or_404
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 
+def handle_uploaded_file(f):
+    with open('some/file/name.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
 
 def detail(request, item_id):
     # response = HttpResponse()
@@ -56,40 +59,23 @@ def detail(request, item_id):
                        'item_title': item.title,'item_maker':item.maker,'item_rating':item.rating,'user':request.user})
 
 def abouturls(request):
-    # response = HttpResponse()
-    # response.write('This is a Library APP.')
-    # return response
-    return render(request, 'libapp_templates/about.html',{'user':request.user})
 
-# Create your views here.
-# def index(request):
-#     response = HttpResponse()
-#     booklist = Book.objects.all() [:10]
-#     h1 = '<p><b>' + 'Books List: ' + '</b></p>'
-#     response.write(h1)
-#     for book in booklist:
-#         p = '<p><a href="http://127.0.0.1:8000/libapp/detail/' + str(book.id) + '/">'+ str(book) + '</a></p>'
-#         response.write(p)
-#
-#     dvdlist = Dvd.objects.all()[:5]
-#     h1 = '<p><b>' + 'DVD List(Normal): ' + '</b></p>'
-#     response.write(h1)
-#     for dvd in dvdlist:
-#         p = '<p><a href="http://127.0.0.1:8000/libapp/detail/' + str(dvd.id) + '">' + str(dvd) + '</a></p>'
-#         response.write(p)
-#
-#     dvdlist = Dvd.objects.all().order_by('-pubyr')[:5]
-#     h1 = '<p><b>' + 'DVD List(Ordered): ' + '</b></p>'
-#     response.write(h1)
-#     for dvd in dvdlist:
-#         p = '<p><a href="http://127.0.0.1:8000/libapp/detail/' + str(dvd.id) + '">' + str(dvd) + '</a></p>'
-#         response.write(p)
-#     return response
+    if 'about_visits' in request.COOKIES:
+        visitcount = int(request.COOKIES['about_visits'])+1
+    else:
+        visitcount=1
 
+    response = render(request, 'libapp_templates/about.html', {'user': request.user, 'visits': visitcount})
+    response.set_cookie('about_visits', visitcount, max_age=300)
+    return response
 
 def index(request):
+    luckynum = 0
+    if 'luckynum' in request.session:
+        luckynum = request.session['luckynum']  # __getitem__
+
     itemlist = Libitem.objects.all().order_by('title')[:10]
-    return render(request, 'libapp_templates/index.html', {'itemlist': itemlist,'user':request.user})
+    return render(request, 'libapp_templates/index.html', {'itemlist': itemlist,'user':request.user,'luckynum':luckynum})
 
 
 def suggestions(request):
@@ -140,10 +126,12 @@ def searchlib(request):
             return render(request, 'libapp_templates/searchlib.html', {'form':form, 'message':message,'user':request.user})
     else:
         form = SearchlibForm()
-    return render(request, 'libapp_templates/searchlib.html', {'form':form,'user':request.user})
+        message = ""
+    return render(request, 'libapp_templates/searchlib.html', {'form':form,'user':request.user,'message':message})
 
 
 def user_login(request):
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -151,6 +139,9 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
+                luckynum = random.randint(1, 9)
+                request.session['luckynum'] = luckynum
+                request.session.set_expiry(60 * 60)
                 return HttpResponseRedirect(reverse('libapp:index'))
             else:
                 return HttpResponse('Your account is disabled.')
@@ -167,6 +158,32 @@ def user_logout(request):
     return HttpResponseRedirect(reverse(('libapp:index')))
 
 def myitems(request):
-    username1 = Libuser.objects.get(username=request.user)
-    itemlist = username1.libitem_set.all()
-    return render(request, 'libapp_templates/myitems.html',{'itemlist':itemlist,'user':request.user})
+    itemlist=[]
+    message=''
+    try:
+        username1 = Libuser.objects.get(username=request.user)
+        itemlist = username1.libitem_set.all()
+        message = "You've checkout the below items..."
+    except:
+        message="You are not a Libuser"
+    return render(request, 'libapp_templates/myitems.html',{'itemlist':itemlist,'user':request.user,'message':message})
+
+def register_user(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST,request.FILES)
+        if form.is_valid():
+            usr_obj = form.save(commit=False)
+            usr_obj.user_image = request.POST['user_image']
+            usr_obj.save()
+
+            return HttpResponseRedirect(reverse('libapp:login'))
+        else:
+            return render(request, 'libapp_templates/newitem.html',
+                          {'form': form, 'user': request.user})
+    else:
+        form=RegisterForm()
+        return render(request, 'libapp_templates/register.html',{'form':form})
+
+def sug_detail(request, item_id):
+    item = Suggestion.objects.get(pk=item_id)
+    return render(request, 'libapp_templates/sug_detail.html',{'item':item})

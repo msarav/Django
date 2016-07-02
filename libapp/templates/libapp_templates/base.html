@@ -5,34 +5,81 @@
     <head>
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
         <title>MAC Library APP - {% block title %}Welcome!{% endblock %}</title>
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+         <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
     </head>
 
     <body>
 
         {% if user.is_authenticated %}
             <div>
-                <h1>{% block myhdg %}Hello {{ user }} {% endblock %}</h1>
-                {% block body_block %}*** {% endblock %}
+                <div class="page-header" style="margin-left:10px; ">
+                    <h1>{% block myhdg %}Hello {{ user.first_name }}  - Welcome to Library App..{% endblock %}</h1>
+                </div>
+
+                <div class="content container">
+                    {% block body_block %}*** {% endblock %}
+
+                </div>
             </div>
+
+
             <hr />
             <div>
                 <ul>
-                    <li class="hbar1"><a href = "{% url 'libapp:index' %}">Main</a></li>
-                    <li class="hbar1"><a href="{% url 'libapp:suggestion' %}">Suggestions</a></li>
-                    <li class="hbar1"><a href="{% url 'libapp:newitem' %}">Add Suggestion</a></li>
-                    <li class="hbar1"><a href="{% url 'libapp:searchlib' %}">Search</a></li>
-                    <li class="hbar1"><a href="{% url 'libapp:myitems' %}">My Items</a></li>
-                    <li class="hbar1"><a href="/libapp/about/">About</a></li>
-                    <li class="hbar1"><a href="{% url 'libapp:logout' %}">Logout</a></li>
+                    <button class="btn btn-primary" type="button">
+                        <li class="hbar1"><a style="color:#fff;" href="{% url 'libapp:index' %}"> Main</a></li>
+                     </button>
+
+                    <button class="btn btn-primary" type="button">
+                        <li class="hbar1"><a style="color:#fff;"  href="{% url 'libapp:suggestion' %}">Suggestions</a></li>
+                     </button>
+
+                    <button class="btn btn-primary" type="button">
+                        <li class="hbar1"><a style="color:#fff;" href="{% url 'libapp:newitem' %}">Add Suggestion</a></li>
+                     </button>
+
+                    <button class="btn btn-primary" type="button">
+                        <li class="hbar1"><a style="color:#fff;" href="{% url 'libapp:searchlib' %}">Search</a></li>
+                     </button>
+
+                    <button class="btn btn-primary" type="button">
+                        <li class="hbar1"><a style="color:#fff;" href="{% url 'libapp:myitems' %}">My Items</a></li>
+                     </button>
+
+                    <button class="btn btn-primary" type="button">
+                        <li class="hbar1"><a style="color:#fff;" href="/libapp/about/">About</a></li>
+                     </button>
+
+
+                    <button class="btn btn-primary" type="button">
+                        <li class="hbar1"><a style="color:#fff;" href="{% url 'libapp:logout' %}">Logout</a></li>
+                     </button>
 
                 </ul>
             </div>
 
         {% else %}
+            <div class="page-header" style="margin-left:10px;">
+                    <h2> Python-Django Library App...</h2>
+                <br/>
+                    <p>Your Lucky number is - <span class="badge">{{ luckynum }}</span></p>
+            </div>
 
-            <p> You are not logged in... Kindly Login/Register.... </p> <br/>
-            <a href="{% url 'libapp:login' %}"> Login </a>  &nbsp;
-            <a href="{% url 'libapp:searchlib' %}"> Register here </a>
+
+            <div class="content container">
+                <p> You are not logged in... Kindly Login/Register.... </p> <br/>
+                <button class="btn btn-primary" type="button">
+                    <a style="color:#fff;" href="{% url 'libapp:login' %}"> Login </a>  &nbsp;
+                 </button>
+                &nbsp;&nbsp;&nbsp;
+                <button class="btn btn-primary" type="button">
+                    <a style="color:#fff;" href="{% url 'libapp:register' %}"> Register here </a>
+                </button>
+            </div>
 
         {% endif %}
     </body>

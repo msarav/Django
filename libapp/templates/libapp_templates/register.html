@@ -6,7 +6,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
         <title>MAC Library APP - {% block title %}Welcome!{% endblock %}</title>
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
          <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
@@ -16,18 +16,15 @@
 
         <div class="page-header" style="margin-left:10px; ">
             <h2> Python-Django Library App...</h2>
-             <p> Kindly provide your login credentials...</p>
+             <p> Register here to login...</p>
         </div>
 
         <div class="content container">
             <br/>
 
-
-             <form class="form-horizontal" action="" method="post">
+             <form class="form-stacked" action="" method="post">
                 {% csrf_token %}
-
-                 <p> Username: <input type="text" label="Username" name="username" value="" /> </p>
-                 <p> Password: <input type="password" label="password" name="password" value="" /> </p>
+                  {{ form }}
                  <br/>
                  <p>
                      <input class="btn btn-default" type="submit" value="Submit" />
@@ -35,7 +32,36 @@
                     <input class="btn btn-default" type="reset" value="Reset" />
                   </p>
             </form>
+
+              <br/><br/>
+                <button class="btn btn-primary" type="button">
+                    <a style="color:#fff;" href="{% url 'libapp:login' %}"> Login </a>  &nbsp;
+                 </button>
+
+
         </div>
     </body>
 </html>
+{##}
+{##}
+{##}
+{#{% load staticfiles %}#}
+{##}
+{#<html>#}
+{#    <head>#}
+{#        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />#}
+{#        <title>MAC Library APP - {% block title %}Welcome!{% endblock %}</title>#}
+{#    </head>#}
+{##}
+{#    <body>#}
+{##}
+{#    <p>Register here....</p>#}
+{#     <form action="" method="post">#}
+{#        {% csrf_token %}#}
+{##}
+{#          {{ form }}#}
+{#         <p> <input type="submit" value="Submit" /> </p>#}
+{#    </form>#}
+{#    </body>#}
+{#</html>#}
 

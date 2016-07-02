@@ -1,7 +1,7 @@
 {% extends 'libapp_templates/base.html' %}
 
 {% block body_block %}
-
+     <p>Your Lucky number for the day - <span class="badge">{{ luckynum }}</span></p>
     {% if itemlist %}
         <h2>List of Library items</h2>
         <ol>

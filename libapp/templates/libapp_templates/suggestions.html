@@ -2,7 +2,7 @@
 
 {% block body_block %}
 
-    <table>
+    <table class="table table-bordered table-hover table-responsive">
     <tr>
         <th>Title</th>
         <th>Publish Year</th>
@@ -13,7 +13,7 @@
     </tr>
     {% for item in itemlist %}
     <tr>
-        <td>{{ item.title }}</td>
+        <td><a href="{%url 'libapp:sug_detail' item.id %}">{{ item.title }}</a></td>
         <td>{{ item.pubyr }}</td>
         <td>{{ item.type }}</td>
         <td>{{ item.cost }}</td>

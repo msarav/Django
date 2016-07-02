@@ -2,3 +2,27 @@
     display: inline;
     margin: 15px;
 }
+
+.white-anchor
+{
+    color:#fff;
+}
+
+/*div .page-header {*/
+    /*background-color: #ff9400;*/
+    /*margin-top: 0;*/
+    /*margin-left: 20px;*/
+    /*padding: 20px 20px 20px 40px;*/
+/*}*/
+
+/*.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {*/
+    /*color: #ffffff;*/
+    /*font-size: 36pt;*/
+    /*text-decoration: none;*/
+    /*margin-left: 20px;*/
+/*}*/
+
+.content {
+    margin-left: 40px;
+}
+

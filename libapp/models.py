@@ -6,6 +6,16 @@ import datetime
 
 from django.contrib.auth.models import User
 
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
+
+def validate_yr(value):
+    if value < 1900 or value > 2016:
+        raise ValidationError(
+            _('%(value)s is not a valid year'),
+            params={'value': value},
+        )
+
 class Libuser(User):
     PROVINCE_CHOICES = (
         ('AB','Alberta'),  # The first value is actually stored in db, the second is descriptive
@@ -17,12 +27,13 @@ class Libuser(User):
     city = models.CharField(max_length=20, default='Windsor')
     province = models.CharField(max_length=2, choices=PROVINCE_CHOICES, default='ON')
     # age = models.IntegerField()
-    phone = models.IntegerField(null=True)
+    phone = models.IntegerField(null=True, blank=True)
 
     #----------- Addtional Fields ------------------- #
 
     postalcode = models.CharField(max_length=7,null=True, blank=True)
-
+    user_image = models.FileField(upload_to = 'libapp/uploaded_files/user_imgs/',null=True, blank=True)
+    #
     # ----------------------------------------------- #
 
     def __str__(self):
@@ -45,7 +56,7 @@ class Libitem(models.Model):
     duedate = models.DateField(default=None, null=True, blank=True)
     last_chkout = models.DateField(default=None, null=True, blank=True)
     date_acquired = models.DateField(default=datetime.date.today())
-    pubyr = models.IntegerField()
+    pubyr = models.IntegerField(validators=[validate_yr],default=2013)
     #overdue = models.BooleanField(default=False)
 
     # ----------- Addtional Fields ------------------- #
@@ -55,7 +66,7 @@ class Libitem(models.Model):
     # ----------------------------------------------- #
 
     def __str__(self):
-        return self.title + ' bya ' + self.itemtype
+        return self.title
 
     def overdue(self):
         if self.checked_out:
@@ -104,6 +115,23 @@ class Dvd(Libitem):
         return self.title + ' bya ' + self.maker
 
 
+# class Suggestion(models.Model):
+#
+#     TYPE_CHOICES = (
+#         (1, 'Book'),
+#         (2,'DVD'),
+#         (3, 'Other'),
+#     )
+#     title = models.CharField(max_length=100)
+#     pubyr = models.IntegerField(null=True, blank=True)
+#     type = models.IntegerField(default=1, choices=TYPE_CHOICES)
+#     cost = models.IntegerField()
+#     num_interested = models.IntegerField()
+#     comments = models.TextField()
+#
+#     def __str__(self):
+#         return self.title #+ ' of type ' + self.type
+
 class Suggestion(models.Model):
 
     TYPE_CHOICES = (
@@ -112,6 +140,9 @@ class Suggestion(models.Model):
         (3, 'Other'),
     )
     title = models.CharField(max_length=100)
+    author = models.CharField(max_length=100,null=True, blank=True)
+    edition = models.CharField(max_length=100,null=True, blank=True)
+    publication = models.CharField(max_length=100,null=True, blank=True)
     pubyr = models.IntegerField(null=True, blank=True)
     type = models.IntegerField(default=1, choices=TYPE_CHOICES)
     cost = models.IntegerField()

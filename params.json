@@ -1,0 +1,6 @@
+{
+  "name": "Django",
+  "tagline": "Experimental Django project with SQLlite",
+  "body": "### Python-Django experimental template\r\n\r\nThis Web application is hosted in Python-Django with backend as SQLite.\r\n\r\nJust an experimental application to play around with Django's powerful features like ORM, MTV and URL resolver.\r\n\r\n### Authors and Contributors\r\nSaravanan Mani (@msarav)\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
